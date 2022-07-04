@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
+import InputTodo from './InputTodo';
 import TodosList from './TodosList';
 
 class TodoContainer extends Component {
@@ -26,12 +27,54 @@ class TodoContainer extends Component {
     };
   }
 
+  handleChange = (id) => {
+    this.setState((prevState) => ({
+      todos: prevState.todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
+        }
+        return todo;
+      }),
+    }));
+  };
+
+  deleteTodo = (id) => {
+    const { todos } = this.state;
+    this.setState({
+      todos: [
+        ...todos.filter((todo) => todo.id !== id),
+      ],
+    });
+  };
+
+  addTodoItem = (title) => {
+    const newTodo = {
+      id: 4,
+      title,
+      completed: false,
+    };
+    const { todos } = this.state;
+    this.setState({
+      todos: [...todos, newTodo],
+    });
+  };
+
   render() {
     const { todos } = this.state;
     return (
       <div>
         <Header />
-        <TodosList todos={todos} />
+        <InputTodo
+          addTodoProps={this.addTodoItem}
+        />
+        <TodosList
+          todos={todos}
+          handleChangeProps={this.handleChange}
+          deleteTodoProps={this.deleteTodo}
+        />
       </div>
     );
   }
