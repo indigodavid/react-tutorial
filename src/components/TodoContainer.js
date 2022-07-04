@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { v4 } from 'uuid';
 import Header from './Header';
 import InputTodo from './InputTodo';
 import TodosList from './TodosList';
@@ -9,17 +10,17 @@ class TodoContainer extends Component {
     this.state = {
       todos: [
         {
-          id: 1,
+          id: v4(),
           title: 'Setup development environment',
           completed: true,
         },
         {
-          id: 2,
+          id: v4(),
           title: 'Develop website and add content',
           completed: false,
         },
         {
-          id: 3,
+          id: v4(),
           title: 'Deploy to live server',
           completed: false,
         },
@@ -52,7 +53,7 @@ class TodoContainer extends Component {
 
   addTodoItem = (title) => {
     const newTodo = {
-      id: 4,
+      id: v4(),
       title,
       completed: false,
     };
