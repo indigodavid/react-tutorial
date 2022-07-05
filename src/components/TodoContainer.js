@@ -51,6 +51,20 @@ class TodoContainer extends Component {
     });
   };
 
+  setUpdate = (updatedTitle, id) => {
+    this.setState((prevState) => ({
+      todos: prevState.todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            title: updatedTitle,
+          };
+        }
+        return todo;
+      }),
+    }));
+  };
+
   addTodoItem = (title) => {
     const newTodo = {
       id: v4(),
@@ -76,6 +90,7 @@ class TodoContainer extends Component {
             todos={todos}
             handleChangeProps={this.handleChange}
             deleteTodoProps={this.deleteTodo}
+            setUpdate={this.setUpdate}
           />
         </div>
       </div>
