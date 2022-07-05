@@ -8,24 +8,13 @@ class TodoContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [
-        {
-          id: v4(),
-          title: 'Setup development environment',
-          completed: true,
-        },
-        {
-          id: v4(),
-          title: 'Develop website and add content',
-          completed: false,
-        },
-        {
-          id: v4(),
-          title: 'Deploy to live server',
-          completed: false,
-        },
-      ],
+      todos: localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : [],
     };
+  }
+
+  updateStorage = () => {
+    const { todos } = this.state;
+    localStorage.setItem('todos', JSON.stringify(todos));
   }
 
   handleChange = (id) => {
@@ -40,6 +29,7 @@ class TodoContainer extends Component {
         return todo;
       }),
     }));
+    this.updateStorage();
   };
 
   deleteTodo = (id) => {
@@ -49,6 +39,7 @@ class TodoContainer extends Component {
         ...todos.filter((todo) => todo.id !== id),
       ],
     });
+    this.updateStorage();
   };
 
   setUpdate = (updatedTitle, id) => {
@@ -63,6 +54,7 @@ class TodoContainer extends Component {
         return todo;
       }),
     }));
+    this.updateStorage();
   };
 
   addTodoItem = (title) => {
@@ -75,6 +67,7 @@ class TodoContainer extends Component {
     this.setState({
       todos: [...todos, newTodo],
     });
+    this.updateStorage();
   };
 
   render() {
