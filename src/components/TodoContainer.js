@@ -8,13 +8,31 @@ class TodoContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : [],
+      todos: [],
     };
   }
 
-  updateStorage = () => {
+  componentDidMount() {
+    const rawData = localStorage.getItem('todos');
+    if (rawData) {
+      const data = JSON.parse(rawData);
+      this.setState({
+        todos: data,
+      });
+    } else {
+      fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
+        .then((response) => response.json())
+        .then((data) => this.setState({
+          todos: data,
+        }));
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
     const { todos } = this.state;
-    localStorage.setItem('todos', JSON.stringify(todos));
+    if (prevState !== todos) {
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }
   }
 
   handleChange = (id) => {
@@ -29,7 +47,6 @@ class TodoContainer extends Component {
         return todo;
       }),
     }));
-    this.updateStorage();
   };
 
   deleteTodo = (id) => {
@@ -39,7 +56,6 @@ class TodoContainer extends Component {
         ...todos.filter((todo) => todo.id !== id),
       ],
     });
-    this.updateStorage();
   };
 
   setUpdate = (updatedTitle, id) => {
@@ -54,7 +70,6 @@ class TodoContainer extends Component {
         return todo;
       }),
     }));
-    this.updateStorage();
   };
 
   addTodoItem = (title) => {
