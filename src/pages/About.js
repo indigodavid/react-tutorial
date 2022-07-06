@@ -2,13 +2,13 @@ import React from 'react';
 import {
   Route, Link, Routes,
 } from 'react-router-dom';
-import SinglePage from '../components/SinglePage';
+import SinglePage from './SinglePage';
 
 const About = () => {
   const currentPath = '/about';
   return (
     <div className="about__content">
-      <ul>
+      <ul className="about__list">
         <li>
           <Link to={`${currentPath}/about-app`}>About App</Link>
         </li>
