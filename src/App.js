@@ -11,7 +11,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<TodoContainer />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/about/*" element={<About />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </Router>
