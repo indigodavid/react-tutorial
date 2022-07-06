@@ -2,7 +2,7 @@
 
 # Project Name
 
-> Description the project.
+> This app contains a simple React App, following the tutorial: React Tutorial From Scratch: A Step-by-Step Guide (2021). We will be consolidating our knowledge about components, props, states, and hooks, among other React features. 
 
 
 ## Built With
@@ -10,6 +10,8 @@
 - JavaScript
 - React
 - CSS
+- React Route
+- React Icons
 
 ## Live Demo (if available)
 
@@ -41,7 +43,7 @@ To get a local copy up and running follow these simple example steps.
     npm run deploy
 
 
-## Authors
+## Author
 
 👤 **David Vera**
 
