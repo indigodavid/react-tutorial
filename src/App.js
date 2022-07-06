@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import TodoContainer from './components/TodoContainer';
 import About from './pages/About';
 import NoMatch from './pages/NoMatch';
